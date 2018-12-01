@@ -18,7 +18,7 @@
 			<md-button class="md-primary button-login2" @click="login">Sign in</md-button>
 		</div>
 		<div class="register-forget">
-			<span class="text-left" @click="goSecondPageTest">
+			<span class="text-left" @click="goRegister">
 				立即注册
 			</span>
 			<span class="text-right">
@@ -77,8 +77,8 @@ export default {
 				}
 			})
 		},
-		goSecondPageTest() {
-			this.$router.push({path:'/mainpage'});
+		goRegister() {
+			this.$router.push({path:'/register'});
 		}
 	}
 }

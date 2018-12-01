@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from './../components/Login'
 import MainPage from './../components/MainPage/MainPage'
+import Register from './../components/Register/Register'
 
 Vue.use(Router)
 
@@ -16,8 +17,14 @@ export default new Router({
     {
     	path:'/mainpage',
     	name:'MainPage',
-      meta:{index:1,auth:true},
+      meta:{index:2,auth:true},
     	component:MainPage
+    },
+    {
+      path:'/register',
+      name:'Register',
+      meta:{index:1},
+      component:Register
     }
   ]
 })
