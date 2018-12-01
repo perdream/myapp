@@ -3,10 +3,13 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import Vuex from 'vuex'
 import VueMaterial from 'vue-material'
+import store from './store/store'
 import 'vue-material/dist/vue-material.min.css'
 
 Vue.use(VueMaterial)
+Vue.use(Vuex)
 
 Vue.config.productionTip = false
 
@@ -14,6 +17,35 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
+  created(){
+  	if(localStorage.getItem("isLogin") === null){
+  		localStorage.setItem("isLogin",'');
+  	}
+  	this.$store.state.isLogin = localStorage.getItem('isLogin');
+  },
   template: '<App/>'
 })
+
+router.beforeEach((to, from, next) => {
+    //根据字段判断是否路由过滤
+    if (to.matched.some(record => record.meta.auth)) {
+        if (localStorage.getItem('isLogin')!== '') {
+          //console.log('heooo');
+            next()
+        } else {
+            //防止无限循环
+            if (to.name === 'Login') {
+                next();
+                return
+            }
+            next({
+                path: '/',
+            });
+        }
+    } else {
+        next()//若点击的是不需要验证的页面,则进行正常的路由跳转
+    }
+});
+

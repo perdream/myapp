@@ -6,7 +6,7 @@
 		</div>
 		<div class="input-container">
 			<md-field md-clearable>
-		      <label>Cleareable</label>
+		      <label>Phone toggle</label>
 		      <md-input v-model="initial"></md-input>
 		    </md-field>
 		    <md-field>
@@ -18,7 +18,7 @@
 			<md-button class="md-primary button-login2" @click="login">Sign in</md-button>
 		</div>
 		<div class="register-forget">
-			<span class="text-left">
+			<span class="text-left" @click="goSecondPageTest">
 				立即注册
 			</span>
 			<span class="text-right">
@@ -28,7 +28,11 @@
 		<md-dialog-alert
 	      :md-active.sync="first"
 	      md-content="Your post has been deleted!"
-	      md-confirm-text="Cool!"/>
+	      md-confirm-text="get!"/>
+	    <md-dialog-alert
+	      :md-active.sync="second"
+	      md-content="Something wrong"
+	      md-confirm-text="get!"/>
 	</div>
 </template>
 <script>
@@ -40,6 +44,7 @@ export default {
 			initial:'',
 			password:'',
 			first:false,
+			second:false,
 		}
 	},
 	components:{
@@ -55,14 +60,25 @@ export default {
 				phoneNum: this.initial,
 				userPwd: this.password
 			}
+			var that = this
+			//请求后端，验证用户phone和password
 			axios.get('/users',{
 				params:param
 			}).then((response)=>{
 				var res = response.data;
-				if(res.status == '0'){
-					console.log(res.result)
+				if(res.status == '0'&& res.result.count > 0){
+					this.$store.commit('isLogin',JSON.stringify(res.result));
+					this.$router.push({path:'/mainpage'});
+					//console.log(localStorage.getItem('isLogin'));
+				}else{
+					that.second = true;
+					return
+					//console.log(res.msg);
 				}
 			})
+		},
+		goSecondPageTest() {
+			this.$router.push({path:'/mainpage'});
 		}
 	}
 }
