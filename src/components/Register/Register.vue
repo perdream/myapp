@@ -92,7 +92,7 @@ export default {
 }
 .input-container {
 	position: relative;
-	top: 20%;
+	top: 16%;
 	left: 10%;
 }
 .button-login {
