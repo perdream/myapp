@@ -11,9 +11,16 @@
       </md-app>
     </md-toolbar>
     <md-drawer :md-active.sync="showNavigation">
-      <md-toolbar class="md-transparent md-drawer2" md-elevation="0">
+      <!--<md-toolbar class="md-transparent md-drawer2" md-elevation="0">
         <span class="md-title">My App name</span>
-      </md-toolbar>
+      </md-toolbar>-->
+      <md-card-header>
+        <md-avatar>
+          <img src="https://placeimg.com/40/40/people/5" alt="Avatar">
+        </md-avatar>
+        <div class="md-title">Title goes here</div>
+        <div class="md-subhead">Subtitle here</div>
+      </md-card-header>
 
       <md-list>
         <md-list-item>
@@ -69,5 +76,9 @@ export default {
 .md-list-item{
   margin-top: 20px;
   border-bottom: 1px solid grey;
+}
+.md-card-header{
+  margin-top: 20px;
+  margin-bottom:-15px;
 }
 </style>

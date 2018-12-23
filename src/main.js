@@ -7,8 +7,25 @@ import Vuex from 'vuex'
 import VueMaterial from 'vue-material'
 import store from './store/store'
 import 'vue-material/dist/vue-material.min.css'
+import fastclick from 'fastclick'
 
+//引入vuematerial
 Vue.use(VueMaterial)
+
+//fastclick绑定body
+Vue.config.productionTip = false
+fastclick.attach(document.body);
+
+//vue-socket
+import VueSocketIO from 'vue-socket.io'
+//import socketio from 'socket.io-client'
+//Vue.use(VueSocketio,socketio('http://localhost:8082'))
+
+Vue.use(new VueSocketIO({
+    //debug: true,
+    connection: 'http://localhost:8989',
+}))
+
 Vue.use(Vuex)
 
 Vue.config.productionTip = false

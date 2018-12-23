@@ -1,6 +1,7 @@
 .DS_Store
 node_modules/
 server/
+src/components/Register/
 /dist/
 npm-debug.log*
 yarn-debug.log*

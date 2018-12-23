@@ -14,6 +14,10 @@
         type: Number,
         default: 2
       },
+      bounce:{
+        type:Boolean,
+        default:false
+      },
       click: {
         type: Boolean,
         default: true
@@ -61,7 +65,8 @@
         }
         this.scroll = new BScroll(this.$refs.wrapper, {
           probeType: this.probeType,
-          click: this.click
+          click: this.click,
+          bounce:this.bounce,
         })
 
         if (this.listenScroll) {
@@ -71,13 +76,13 @@
           })
         }
 
-        if (this.pullup) {
+        /*if (this.pullup) {
           this.scroll.on('scrollEnd', () => {
             if (this.scroll.y <= (this.scroll.maxScrollY + 50)) {
               this.$emit('scrollToEnd')
             }
           })
-        }
+        }*/
 
         if (this.beforeScroll) {
           this.scroll.on('beforeScrollStart', () => {

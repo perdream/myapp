@@ -5,6 +5,7 @@
     <!--mainpage content-->
     <scroll-view class="wrapper">
       <div class="wrapper-container">
+        <!--第一屏-->
         <md-card>
           <md-card-header>
             <md-avatar>
@@ -33,6 +34,123 @@
               </md-button>
           </md-card-actions>
         </md-card>
+         <!--第二屏-->
+        <md-card>
+          <md-card-header>
+            <md-avatar>
+              <img src="https://placeimg.com/40/40/people/5" alt="Avatar">
+            </md-avatar>
+            <div class="md-title">Title goes here</div>
+            <div class="md-subhead">Subtitle here</div>
+          </md-card-header>
+          <md-card-media>
+            <img src="@/assets/images/bar.jpg" alt="People">
+          </md-card-media>
+          <md-card-content>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio itaque ea, nostrum odio. Dolores, sed accusantium quasi non
+          </md-card-content>
+            <md-card-actions>
+              <md-button class="md-icon-button">
+                哈哈
+              </md-button>
+
+              <md-button class="md-icon-button">
+                哈哈
+              </md-button>
+
+              <md-button class="md-icon-button">
+                哈哈
+              </md-button>
+          </md-card-actions>
+        </md-card>
+        <!--第三屏-->
+        <md-card>
+          <md-card-header>
+            <md-avatar>
+              <img src="https://placeimg.com/40/40/people/5" alt="Avatar">
+            </md-avatar>
+            <div class="md-title">Title goes here</div>
+            <div class="md-subhead">Subtitle here</div>
+          </md-card-header>
+          <md-card-media>
+            <img src="@/assets/images/bar.jpg" alt="People">
+          </md-card-media>
+          <md-card-content>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio itaque ea, nostrum odio. Dolores, sed accusantium quasi non
+          </md-card-content>
+            <md-card-actions>
+              <md-button class="md-icon-button">
+                哈哈
+              </md-button>
+
+              <md-button class="md-icon-button">
+                哈哈
+              </md-button>
+
+              <md-button class="md-icon-button">
+                哈哈
+              </md-button>
+          </md-card-actions>
+        </md-card>
+        <!--第四屏-->
+        <md-card>
+          <md-card-header>
+            <md-avatar>
+              <img src="https://placeimg.com/40/40/people/5" alt="Avatar">
+            </md-avatar>
+            <div class="md-title">Title goes here</div>
+            <div class="md-subhead">Subtitle here</div>
+          </md-card-header>
+          <md-card-media>
+            <img src="@/assets/images/bar.jpg" alt="People">
+          </md-card-media>
+          <md-card-content>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio itaque ea, nostrum odio. Dolores, sed accusantium quasi non
+          </md-card-content>
+            <md-card-actions>
+              <md-button class="md-icon-button">
+                哈哈
+              </md-button>
+
+              <md-button class="md-icon-button">
+                哈哈
+              </md-button>
+
+              <md-button class="md-icon-button">
+                哈哈
+              </md-button>
+          </md-card-actions>
+        </md-card>
+        <!--第五屏-->
+        <md-card>
+          <md-card-header>
+            <md-avatar>
+              <img src="https://placeimg.com/40/40/people/5" alt="Avatar">
+            </md-avatar>
+            <div class="md-title">Title goes here</div>
+            <div class="md-subhead">Subtitle here</div>
+          </md-card-header>
+          <md-card-media>
+            <img src="@/assets/images/bar.jpg" alt="People">
+          </md-card-media>
+          <md-card-content>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio itaque ea, nostrum odio. Dolores, sed accusantium quasi non
+          </md-card-content>
+            <md-card-actions>
+              <md-button class="md-icon-button">
+                哈哈
+              </md-button>
+
+              <md-button class="md-icon-button">
+                哈哈
+              </md-button>
+
+              <md-button class="md-icon-button">
+                哈哈
+              </md-button>
+          </md-card-actions>
+        </md-card>
+        <!--第六屏-->
         <md-card>
           <md-card-header>
             <md-avatar>

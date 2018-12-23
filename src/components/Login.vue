@@ -67,7 +67,8 @@ export default {
 			}).then((response)=>{
 				var res = response.data;
 				if(res.status == '0'&& res.result.count > 0){
-					this.$store.commit('isLogin',JSON.stringify(res.result));
+					//console.log(JSON.stringify(res.result));
+					this.$store.commit('isLogin',res.result);
 					this.$router.push({path:'/mainpage'});
 					//console.log(localStorage.getItem('isLogin'));
 				}else{
