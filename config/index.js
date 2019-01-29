@@ -17,6 +17,9 @@ module.exports = {
         '/register/*': {
             target:'http://localhost:3000'
         },
+        '/message/*': {
+            target:'http://localhost:3000'
+        },
     },
 
     // Various Dev Server settings

@@ -25,7 +25,7 @@ export default {
 				this.transitionname = 'slide-right'
 			}
 		}
-	}
+	},
 }
 </script>
 

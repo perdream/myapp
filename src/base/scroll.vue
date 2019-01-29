@@ -41,11 +41,18 @@
       refreshDelay: {
         type: Number,
         default: 20
-      }
+      },
+      scrollToEndFlag: {
+        type: Boolean,
+        default: false
+      },
+      messageList:'',
     },
     mounted() {
       setTimeout(() => {
-        this._initScroll()
+        this._initScroll();
+        //console.log(this.scroll.maxScrollY);
+        this.refresh();
       },1000);
     },
     /*created() {
@@ -56,6 +63,7 @@
     activated() {
       setTimeout(() => {
         this._initScroll()
+        //console.log(this.scroll.maxScrollY);
       }, 20);
     },
     methods: {
@@ -73,8 +81,16 @@
           let me = this
           this.scroll.on('scroll', (pos) => {
             //me.$emit('scrollp', Math.round(pos.y))
-          })
+            //console.log( Math.round(pos.y));
+            //console.log(this.scroll.maxScrollY)
+          }) 
         }
+
+        if(this.scrollToEndFlag) {
+          //console.log(this.scroll.maxScrollY);
+            this.refresh();
+            this.scroll.scrollTo(0,this.scroll.maxScrollY)
+        };
 
         /*if (this.pullup) {
           this.scroll.on('scrollEnd', () => {
@@ -97,14 +113,17 @@
         this.scroll && this.scroll.enable()
       },
       refresh() {
-        this.scroll && this.scroll.refresh()
+        this.scroll.scrollTo(0,this.scroll.maxScrollY)
       },
-      scrollTo() {
+      /*scrollTo() {
         this.scroll && this.scroll.scrollTo.apply(this.scroll, arguments)
-      },
+      },*/
       scrollToElement() {
         this.scroll && this.scroll.scrollToElement.apply(this.scroll, arguments)
       },
+      chilFn(msg) {
+        console.log(msg);
+      }
     },
     watch: {
       data() {
@@ -112,6 +131,11 @@
           this.refresh()
         }, this.refreshDelay)
       },
+      messageList() {
+        setTimeout(() => {
+          this.refresh()
+        }, this.refreshDelay)
+      }
     }
   }
 </script>

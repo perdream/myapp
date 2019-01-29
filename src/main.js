@@ -8,6 +8,11 @@ import VueMaterial from 'vue-material'
 import store from './store/store'
 import 'vue-material/dist/vue-material.min.css'
 import fastclick from 'fastclick'
+import 'material-design-icons/iconfont/material-icons.css'
+import Mint from 'mint-ui';
+
+//引入mint_UI
+Vue.use(Mint);
 
 //引入vuematerial
 Vue.use(VueMaterial)
