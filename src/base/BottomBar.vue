@@ -2,7 +2,7 @@
     <div class="bottom-container">
       <md-bottom-bar md-sync-route>
         <md-bottom-bar-item to="" md-label="Home" @click="goHome" md-icon="home"></md-bottom-bar-item>
-        <md-bottom-bar-item to="" md-label="Add" md-icon="add"></md-bottom-bar-item>
+        <md-bottom-bar-item to="" md-label="Add" md-icon="add_location" @click="goAdd"></md-bottom-bar-item>
         <md-bottom-bar-item md-label="Message" @click="goMessage" md-icon="message"></md-bottom-bar-item>
         <md-bottom-bar-item to="" md-label="Mine" md-icon="account_circle"></md-bottom-bar-item>
       </md-bottom-bar>
@@ -22,6 +22,9 @@ export default {
     },
     goHome() {
       this.$router.push({path:'/mainpage'});
+    },
+    goAdd() {
+      this.$router.push({path:'/add'});
     }
   }
 }

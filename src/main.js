@@ -10,6 +10,7 @@ import 'vue-material/dist/vue-material.min.css'
 import fastclick from 'fastclick'
 import 'material-design-icons/iconfont/material-icons.css'
 import Mint from 'mint-ui';
+import'mint-ui/lib/style.css'
 
 //引入mint_UI
 Vue.use(Mint);

@@ -5,6 +5,7 @@ import MainPage from './../components/MainPage/MainPage'
 import Register from './../components/Register/Register'
 import Message from './../components/Messages/Message'
 import MessageDetail from './../components/MessageDetail/MessageDetail'
+import Add from './../components/Add/Add'
 
 Vue.use(Router)
 
@@ -31,13 +32,19 @@ export default new Router({
     {
       path:'/message',
       name:'Message',
-      meta:{index:3,auth:true},
+      meta:{index:4,auth:true},
       component:Message,
     },
     {
       path:'/message/messagedetail',
       component: MessageDetail,
-      meta:{index:4,auth:true},
+      meta:{index:5,auth:true},
+    },
+    {
+      path:'/add',
+      name: 'Add',
+      meta:{index:3,auth:true},
+      component: Add
     }
   ]
 })
