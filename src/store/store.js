@@ -12,6 +12,8 @@ const store = new Vuex.Store({
 		username:'',
 		//resolve:'',
 		messageList:[],
+		clientTalkId:'',
+		avatar:'',
 	},
 	mutations:{
 		isLogin(state,msg){
@@ -19,17 +21,27 @@ const store = new Vuex.Store({
 			state.userid = msg.list[0].phoneNum;
 			state.myId = msg.list[0]._id;
 			state.username = msg.list[0].userName;
+			state.avatar = msg.list[0].avatar;
 			localStorage.setItem("isLogin",JSON.stringify(msg));
 		},
 		/*resolveMsg(state,msg){
 			state.resolve = msg;
 		},*/
-		saveMsg(state,msg){
-			state.messageList.push(msg);
+		saveMsg2(state,msg){
+			if(state.clientTalkId == msg.from){
+				state.messageList.push(msg);
+			}
+		},
+		//修改头像
+		updataAvatar(state,data) {
+			state.avatar = data
+		},
+		saveClientId(state,id){
+			state.clientTalkId = id;
 		},
 		getMsg(state,msg) {
 			state.messageList = msg;
-		}
+		},
 	}
 });
 

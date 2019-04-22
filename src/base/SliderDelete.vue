@@ -9,7 +9,7 @@
       <!-- 插槽中放具体项目中需要内容         -->   
           <slot></slot>
          </div>
-         <div class="remove" ref='remove'>
+         <div class="remove" ref='remove' @click.stop="handleClick">
              删除
          </div>
   </div>
@@ -25,9 +25,12 @@
           disX: 0,    //移动距离
           deleteSlider: '',//滑动时的效果,使用v-bind:style="deleteSlider"
        }
-    
      },
      methods:{
+         handleClick (v) {
+             this.$emit('msg-from-child', this.val)
+             this.deleteSlider = "transform:translateX(0px)";
+         },
          touchStart(ev){
                 ev= ev || event
           //tounches类数组，等于1时表示此时有只有一只手指在触摸屏幕

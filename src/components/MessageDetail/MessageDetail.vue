@@ -20,7 +20,7 @@
         </div>
       </div>
     </transition>-->
-    <scroll-view class="wrapper" :scrollToEndFlag="scrollToEndFlag" :messageList="messageList.length" >
+    <scroll-view class="wrapper" :scrollToEndFlag="scrollToEndFlag" :messageList="messageList" >
       <div class="contact" >
         <div v-for="(item,index) in messageList" :key="index">
           <div class="time-line">{{item.timer}}</div>
@@ -31,12 +31,12 @@
               </span>
             </div>
             <div class="right-avatar">
-              <img class="avatar" src="https://placeimg.com/40/40/people/1" alt="People">
+              <img class="avatar" :src="$store.state.avatar" alt="People">
             </div>
           </div>
           <div class="left1" v-else>
             <div class="left-avatar">
-              <img class="avatar" src="https://placeimg.com/40/40/people/1" alt="People">
+              <img class="avatar" :src="toavatar2" alt="People">
             </div>
             <div class="left-text">
               <span class="text-left">
@@ -83,18 +83,26 @@ export default {
       msg:'',
       timer:new Date().getYear(),
       msgObj2:'',
+      toavatar2:''
     }
   },
-  created(){
+  /*created(){
     this.getMessageList();
-  },
+  },*/
   mounted(){
+    //console.log(this.$route.query)
+    this.toavatar2 = this.$route.query.avatar
+  },
+  activated(){
+    this.toavatar2 = this.$route.query.avatar
+    //console.log(this.$route.query);
+    this.clientTalk = this.$route.query;
     this.from = this.$store.state.myId;
     this.to = this.clientTalk.id;
+    this.$store.commit('saveClientId',this.clientTalk.id);
     //this.$refs.child.chilFn('我是父元素传过来的')
     //console.log('hello');
     //console.log(this.$route.query);
-    this.clientTalk = this.$route.query;
     this.getMessageList();
     /*this.messageList = [
       {
@@ -149,8 +157,7 @@ export default {
 	    //服务端发来resvmsg
 	    resvmsg(value) {
         if(value.to == this.$store.state.myId){
-          this.$store.commit('saveMsg',value);
-          //console.log('hhh');
+          this.$store.commit('saveMsg2',value);
         }
 	    },
 	    /*error() {
@@ -178,6 +185,7 @@ export default {
         timer:this.timer,
         msg:this.sendmessage,
         fromName:this.$store.state.username,
+        avatar:this.$store.state.avatar
       };
       this.msgObj2 = msgObj;
       this.saveMsg();
@@ -187,11 +195,69 @@ export default {
       this.scrollToEndFlag = true;
       //this.getClientTime();                                                                   
     },
-    backMessage() {
-      //this.$destroy();
-      this.$router.push({
-        path:'/message'
+    //查看是否已经存在这样一条recent数据
+    hasRecent() {
+      //当前用户id
+      let userId = this.$store.state.myId;
+      //获取正在聊天对象的id
+      let fromId = this.clientTalk.id
+      //调用查询recent集合的接口，查看是否存在这两个条件对用的数据
+      let param = {
+        userId:userId,
+        fromId:fromId
+      }
+      axios.get('/recent/hasrecent',{
+        params:param
+      }).then((response)=>{
+        let res = response.data;
+        if(res.status == 0 && res.result.count > 0){
+          //存在该数据，则调用更新该条数据的接口，修改条目中的text文本
+          var parama = new URLSearchParams();
+          let config = {
+            headers:{'Content-Type':'application/x-www-form-urlencoded'}
+          };
+          parama.append('userId',this.$store.state.myId);
+          parama.append('fromId',this.clientTalk.id);
+          parama.append('text',this.messageList[this.messageList.length - 1].msg);
+          axios.post('/recent/updatarecent',parama,config).then((response)=>{
+            let res = response.data;
+            if(res.status == 0){
+              //修改最近聊天条目成功
+              this.updataNum0()
+            }
+          })
+        }else{
+          //不存在数据，调用存储接口，保存userid、fromid、text、fromNickName、isdel=2、num=0、avatar
+          var parama = new URLSearchParams();
+          let config = {
+              headers:{'Content-Type':'application/x-www-form-urlencoded'}
+          };
+          parama.append('userId',this.$store.state.myId);
+          parama.append('fromId',this.clientTalk.id);
+          parama.append('text',this.messageList[this.messageList.length - 1].msg);
+          parama.append('fromNickName',this.clientTalk.userName);
+          parama.append('isdel',2);
+          parama.append('num',0);
+          parama.append('avatar',this.toavatar2)
+          let that = this
+          axios.post('/recent/addrecent',parama,config).then((response)=>{
+            let res = response.data;
+            if(res.status == 0){
+              //添加最近聊天条目成功
+              this.$router.push({
+                path:'/message'
+              });
+            }
+          });
+        }
       })
+    },
+    backMessage() {
+      this.hasRecent()
+      //this.$destroy();
+      //获取最后一条消息信息,并修改或插入recent集合中，用于指message页面中展示
+      //console.log(this.messageList[this.messageList.length - 1])
+      //调用后端接口，查看是否已经存在这样一条recent数据
     },
     getClientTime() {
       this.clientTime = new Date();
@@ -210,6 +276,7 @@ export default {
       parama.append('to',this.to);
       parama.append('msg',this.msg);
       parama.append('timer',this.timer);
+      parama.append('avatar',this.$store.state.avatar);
       axios.post('/message/saveMsg',parama,config).then((response)=>{
         let res = response.data;
         if(res.status == 0){
@@ -242,6 +309,22 @@ export default {
       let id = ourId.sort().join('');
       return id;
     },
+    updataNum0(){
+      var parama = new URLSearchParams();
+      let config = {
+        headers:{'Content-Type':'application/x-www-form-urlencoded'}
+      };
+      parama.append('userId',this.$store.state.myId);
+      parama.append('fromId',this.clientTalk.id);
+      axios.post('/recent/updatanum0',parama,config).then((response)=>{
+      let res = response.data;
+      if(res.status == 0){
+          this.$router.push({
+            path:'/message'
+          });
+        }
+      })
+    }
     /*showPop() {
       //console.log("click");
       //console.log(this.$route.path);

@@ -20,6 +20,27 @@ module.exports = {
         '/message/*': {
             target:'http://localhost:3000'
         },
+        '/technique/*': {
+            target:'http://localhost:3000'
+        },
+        '/live/*': {
+            target:'http://localhost:3000'
+        },
+        '/comment/*': {
+            target:'http://localhost:3000'
+        },
+        '/collect/*': {
+            target:'http://localhost:3000'
+        },
+        '/attention/*': {
+            target:'http://localhost:3000'
+        },
+        '/recent/*': {
+            target:'http://localhost:3000'
+        },
+        '/apply/*': {
+            target:'http://localhost:3000'
+        }
     },
 
     // Various Dev Server settings

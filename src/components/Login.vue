@@ -21,7 +21,7 @@
 			<span class="text-left" @click="goRegister">
 				立即注册
 			</span>
-			<span class="text-right">
+			<span class="text-right" @click="goForget">
 				忘记密码?
 			</span>
 		</div>
@@ -80,6 +80,9 @@ export default {
 		},
 		goRegister() {
 			this.$router.push({path:'/register'});
+		},
+		goForget() {
+			this.$router.push({path:'/forget'})
 		}
 	}
 }

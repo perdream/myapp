@@ -1,7 +1,7 @@
 <template>
     <div>
 	    <transition name="outline">
-	      <div class="popup" v-show="popupVisible" @click="goMessageDetail(msg.from,msg.fromName)">
+	      <div class="popup" v-if="popupVisible" @click="goMessageDetail(msg.from,msg.fromName,$store.state.avatar)">
 	        <div class="popup-title">
 	          <img src="@/assets/images/comment.png" class="popup-img">
 	          <span class="popup-name">{{msg.fromName}}</span>
@@ -32,8 +32,8 @@ export default {
     },
     showPop() {
       //console.log("click");
-      //console.log(this.$route.path);
-      if(this.$route.path !== '/message/messagedetail'){
+      console.log(this.$route.path);
+      if(this.$route.path != '/message/messagedetail'){
         this.popupVisible = true;
         setTimeout(() => {
           this.popupVisible = false;
@@ -51,12 +51,13 @@ export default {
     	}
     },
     //跳转聊天界面
-    goMessageDetail(param1,param2) {
+    goMessageDetail(param1,param2,param3) {
       this.$router.push({
           path:'/message/messagedetail',
            query: {
             id: param1,
-            userName: param2
+            userName: param2,
+            avatar:param3
         },
       });
     }
